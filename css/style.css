@@ -1,0 +1,10 @@
+#canvasOne {
+  margin: 0;
+  background-color: #0df983;
+  display: block;
+}
+
+#canvasImg {
+  position: relative;
+  display: block;
+}
