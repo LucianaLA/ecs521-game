@@ -25,3 +25,7 @@ interactable objects class
 background
 furniture boundaries?
 button class for interaction
+
+
+Main branch will be used for finilised code
+Dev branch will be used to make changed so past code is still accessible
