@@ -1,18 +1,21 @@
 #canvas {
   margin: 0;
   width: 100%;
-  height: 100%;
-  background-color: grey;
-  display: block;
+  /* background-color: grey; */
+  background-image: url("../media/level1.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 3pt black solid;
 }
 
-#canvasImg {
-  position: relative;
-  display: block;
-}
-
-#title{
-  position: relative;
-  align-items: center;
+h1{
+  width: 100%;
+  text-align: center;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#pets, #dog{
+  width: 20%;
+  height: auto;
+  float: left;
 }
