@@ -13,6 +13,27 @@ window.addEventListener('load', function() {
     //     ctx.drawImage(startingBackground, 0, 0);
     // }
 
+    // attempt to make button via ball
+    // function draw_ball(x, y){
+    //     ctx.beginPath();
+    //     ctx.arc(x, y, 25, 0, 2*Math.PI, true);
+    //     ctx.stroke();
+    //     ctx.fillStyle = 'white';
+    //     ctx.fill();
+    // }
+    // draw_ball(canvas.width/2, canvas.height/2);
+
+    var petChoice;
+    petChoice = "dog";
+    var petUrl = "../media/"+petChoice+"-lofi.png";
+
+    // var petUrl = function() { 
+    //     var petChoice;
+    //     if ()
+    //     petChoice = "dog";
+    //     "../media/"+petChoice+"-lofi.png";
+    // }
+
     // play music
     // buttons
     // let buttonHowToPlay = document.getElementById("buttonHowToPlay"); // make svg element 
@@ -24,7 +45,7 @@ window.addEventListener('load', function() {
     var petX=canvas.width/2;
     var petY=canvas.height/2;
     const pet = new Image();
-    pet.src = "../media/dog-lofi.png"; //dog for now, need to make pet into object
+    pet.src = petUrl;
     let w = 50; // pet image width
     let h = 35; // pet image height
     pet.onload = () => {
@@ -78,6 +99,8 @@ window.addEventListener('load', function() {
             
         //clears past pet and draws a new one in the updated pos
         ctx.clearRect(petX-5,petY-5,w+10,h+10);
+        // try to either rotate pet picture when walking or change url path to different angles
+        // ctx.scale(-1, 1);
         ctx.drawImage(pet, petX, petY, w, h);
         
      }
@@ -94,6 +117,7 @@ window.addEventListener('load', function() {
     //  }
      //moves pet when arrow keys are used
      window.addEventListener("keydown", move, false);
+    //  window.addEventListener("onClick", petUrl, false);
     //  window.addEventListener("onClick", interact, false);
 
      return 1;
