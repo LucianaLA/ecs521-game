@@ -2,26 +2,16 @@ window.addEventListener('load', function() {
     // loading 2D environment
     let canvas = document.getElementById("canvas");
     let ctx = canvas.getContext("2d"); 
-// test test
-    ////////////////////Starting Screen //////////////////////////////////////////////
-    // const startingBackground = new Image();
-    // startingBackground.src = "";
-    // startingBackground.style.background = contain;
-    // startingBackground.width = canvas.width;
-    // startingBackground.height = canvas.height;
-    // startingBackground.onload = () => {
-    //     ctx.drawImage(startingBackground, 0, 0);
-    // }
 
-    // attempt to make button via ball
-    // function draw_ball(x, y){
-    //     ctx.beginPath();
-    //     ctx.arc(x, y, 25, 0, 2*Math.PI, true);
-    //     ctx.stroke();
-    //     ctx.fillStyle = 'white';
-    //     ctx.fill();
-    // }
-    // draw_ball(canvas.width/2, canvas.height/2);
+    // obstacle class
+    class Obstacle {
+        constructor(height, width) {
+            this.height = height;
+            this.width = width;
+          }
+    }
+
+    bed =  new Obstacle(500,400);
 
     var petChoice;
     petChoice = "dog";
