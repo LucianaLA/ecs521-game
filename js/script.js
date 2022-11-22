@@ -2,7 +2,7 @@ window.addEventListener('load', function() {
     // loading 2D environment
     let canvas = document.getElementById("canvas");
     let ctx = canvas.getContext("2d"); 
-
+// test test
     ////////////////////Starting Screen //////////////////////////////////////////////
     // const startingBackground = new Image();
     // startingBackground.src = "";
