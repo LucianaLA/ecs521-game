@@ -9,6 +9,10 @@
   border: 3pt black solid;
 }
 
+body{
+  background-color: grey;
+}
+
 h1{
   width: 100%;
   text-align: center;
@@ -16,7 +20,7 @@ h1{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-input{
+a{
   background-color: pink;
   color: white;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -24,6 +28,6 @@ input{
   border: 0;
 }
 
-input:hover{
+a:hover{
   background-color: hotpink;
 }
