@@ -1,12 +1,11 @@
 #canvas {
-  align-content: center;
-  margin: 0;
-  width: 100%;
+  width: 99.8%;
+  height: 100%;
   /* background-color: grey; */
   background-image: url("../media/level1.png");
-  background-size: contain;
+  background-size:contain;
   background-repeat: no-repeat;
-  border: 3pt black solid;
+  border: 1pt black solid;
 }
 
 body{
@@ -20,7 +19,13 @@ h1{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-a{
+p{
+  text-align: center;
+  font-size: 200%;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+input{
   background-color: pink;
   color: white;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -28,6 +33,6 @@ a{
   border: 0;
 }
 
-a:hover{
+input:hover{
   background-color: hotpink;
 }
