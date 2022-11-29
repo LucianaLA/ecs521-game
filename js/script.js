@@ -9,12 +9,24 @@ window.addEventListener('load', function () {
         return x >= 0 && x < canvas.width && y >= 0 && y < canvas.height;
     }
 
-
     // obstacle class
     class Obstacle {
-        constructor(height, width) {
-            this.height = height;
+        constructor(x,y,width,height) {
             this.width = width;
+            this.height = height;
+            this.x = x;
+            this.y = y;
+        }
+        drawObstacle(){
+            ctx.rect(this.x,this.y,this.width,this.height);
+            ctx.fill();
+            console.log(this.x);
+        }
+        obstacleArea(x,y){
+            return x > this.x && 
+            x < this.x + this.width && 
+            y > this.y && 
+            y < this.y + this.height;
         }
     }
 
@@ -34,41 +46,65 @@ window.addEventListener('load', function () {
                 ctx.drawImage(petimg, x, y, this.petW, this.petH);
             }
         }
-        petMove(evt) {
+        petMove = (evt)=> {
             let step = 5;
             let dx = 5; //how many px pet moves
             let dy = 5;
             // console for checking numbers
             console.log('Key code: ' + evt.keyCode);
-            console.log('x: ' + pet.x);
-            console.log('y: ' + pet.y);
+            console.log('pet x: ' + this.x);
+            console.log('pet y: ' + this.y);
+            let lastx = this.x;
+            let lasty = this.y;
     
-            if (evt.keyCode == 39 && inCanvas(pet.x + pet.petW + step, pet.y)) { // right
-                pet.x += dx;
+            //inCanvas position check////////
+            if (evt.keyCode == 39 && inCanvas(this.x + this.petW + step, this.y)) { // right
+                this.x += dx;
             }
-            else if (evt.keyCode == 37 && inCanvas(pet.x + step, pet.y)) { // left
-                pet.x -= dx;
+            else if (evt.keyCode == 37 && inCanvas(this.x + step, this.y)) { // left
+                this.x -= dx;
             }
-            else if (evt.keyCode == 38 && inCanvas(pet.x + step, pet.y)) { // up
-                pet.y -= dy;
+            else if (evt.keyCode == 38 && inCanvas(this.x + step, this.y)) { // up
+                this.y -= dy;
             }
-            else if (evt.keyCode == 40 && inCanvas(pet.x + step, pet.y + pet.petH)) { // down
-                pet.y += dy;
+            else if (evt.keyCode == 40 && inCanvas(this.x + step, this.y + this.petH)) { // down
+                this.y += dy;
             }
-            // if the pos satisfies incanvas it will draw pet in updated pos
+            // if the pos satisfies inCanvas it will draw pet in updated pos////////
     
             //clears past pet and draws a new one in the updated pos
-            ctx.clearRect(pet.x - step, pet.y - step, pet.petW + step*2, pet.petH + step*2);
             // try to either rotate pet picture when walking or change url path to different angles
             // ctx.scale(-1, 1);
-            pet.drawPet(pet.x, pet.y);
+            if (bed.obstacleArea(this.x,this.y)) {
+                this.x = lastx;
+                this.y = lasty;
+            }
+            if (evt.keyCode == 39 && bed.obstacleArea(this.x + this.petW, this.y)) { // right
+                this.x = lastx;
+                this.y = lasty;
+            }
+            else if (evt.keyCode == 37 && bed.obstacleArea(this.x, this.y)) { // left
+                this.x = lastx;
+                this.y = lasty;
+            }
+            else if (evt.keyCode == 38 && bed.obstacleArea(this.x, this.y)) { // up
+                this.x = lastx;
+                this.y = lasty;
+            }
+            else if (evt.keyCode == 40 && bed.obstacleArea(this.x, this.y + this.petH)) { // down
+                this.x = lastx;
+                this.y = lasty;
+            }
+            ctx.clearRect(this.x - step, this.y - step, this.petW + step*2, this.petH + step*2);
+            this.drawPet(this.x, this.y);
         }
     }
 
-    pet = new Pet("dog", canvas.width / 2, canvas.height / 2, 50, 35);
-    pet.drawPet(canvas.width / 2, canvas.height / 2);
+    const bed = new Obstacle(10, 0, 90, 90);
+    bed.drawObstacle();
 
-    bed = new Obstacle(500, 400);
+    var pet = new Pet("dog", canvas.width / 2, canvas.height / 2, 50, 35);
+    pet.drawPet(canvas.width / 2, canvas.height / 2);
 
     // play music
     //////////////////// Pet Choice ///////////////////////
