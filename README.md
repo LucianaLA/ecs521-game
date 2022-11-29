@@ -29,3 +29,6 @@ button class for interaction
 
 Main branch will be used for finilised code
 Dev branch will be used to make changed so past code is still accessible
+
+# Known bugs:
+- pet blinks while walking after the dog class was created
