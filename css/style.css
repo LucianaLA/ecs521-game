@@ -12,12 +12,18 @@
 h1{
   width: 100%;
   text-align: center;
+  font-size: 300%;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-button{
+input{
   background-color: pink;
   color: white;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 200%;
+  border: 0;
+}
+
+input:hover{
+  background-color: hotpink;
 }
