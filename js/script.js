@@ -3,10 +3,42 @@ window.addEventListener('load', function () {
     let canvas = document.getElementById("canvas");
     let ctx = canvas.getContext("2d");
 
-
     //checks if the pet is inside the canvas area
     function inCanvas(x, y) {
         return x >= 0 && x < canvas.width && y >= 0 && y < canvas.height;
+    }
+
+    //inventory as array
+    let inventory = []; //fill with item eg [key,food,food], [food,key]
+
+    //item (for inventory) class
+    class Item{
+        constructor(itemName){
+            //item type? if item == health, if item == key etc
+            itemName = this.itemName;
+        }
+        addToInventory(itemName){
+            inventory = inventory.push(itemName);
+        }
+        removeFromInventory(itemName){ //remove first instance of item
+            for(let i=0; i<inventory.length; i++){
+                if(inventory[i]==itemName){
+                    inventory = inventory.splice(i);
+                    break;
+                }
+            }
+        }
+        cleanInventory(){
+            //when you switch levels, 
+            inventory.length = 0;
+        }
+        viewInventory(){
+            //return inventory array
+        }
+        checkItem(itemName){
+            //searches array for key when prompted by door, if yes, remove from array and open door
+            //searches array for food when prompted by user, if yes remove from array and increase health
+        }
     }
 
     // obstacle class
@@ -100,7 +132,7 @@ window.addEventListener('load', function () {
         }
     }
 
-    const bed = new Obstacle(10, 0, 90, 90);
+    const bed = new Obstacle(30, 0, 60, 65);
     bed.drawObstacle();
 
     var pet = new Pet("dog", canvas.width / 2, canvas.height / 2, 50, 35);
@@ -116,9 +148,9 @@ window.addEventListener('load', function () {
     // }
 
     // add item to inventory
-    // function addToInventory(item){}
+    // Item.addToInventory(itemName); should append inventory[]??
 
-    // food mechanic
+    // food mechanic - merged into item object method checkItem(food);
     // function eat(){
     //     if (hunger<petFull){ // if hunger less than max, add
     //         hunger++;
@@ -127,7 +159,8 @@ window.addEventListener('load', function () {
     //     }
     // }
 
-    //  function interact(evt){
+    // merged into item object method checkItem(key);
+    //  function interact(evt){ 
     //     if (evt.keyCode == 73 && inInteractionArea(x,y)){ 
     //         if (pet.x - 20< key.x < pet.x + 20 || pet.y -20 < key.y < pet.y + 20){ // arbitary numbers, test to see if works well and adjust
     //             addToInventory("key");
