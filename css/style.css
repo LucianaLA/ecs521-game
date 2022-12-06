@@ -2,18 +2,19 @@
   width: 99.8%;
   height: 100%;
   /* background-color: grey; */
-  background-image: url("../media/level1.png");
+  /* background-image: url("../media/level1.png"); */
   background-size:contain;
   background-repeat: no-repeat;
-  border: 1pt black solid;
+  border: 1pt white solid;
 }
 
 body{
-  background-color: grey;
+  background-color: rgb(77, 49, 18);
 }
 
 h1{
   width: 100%;
+  color:white;
   text-align: center;
   font-size: 300%;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
