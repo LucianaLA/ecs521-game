@@ -79,7 +79,7 @@ window.addEventListener('load', function () {
             this.petW = petW;
             this.petH = petH;
         }
-        drawPet(x, y) {
+        drawPet1(x, y) {
             var petUrl = "../media/" + this.petChoice + "1.png";
             const petimg = new Image();
             petimg.src = petUrl;
@@ -89,8 +89,31 @@ window.addEventListener('load', function () {
 
             return petimg;
         }
+        drawPet2(x, y) {
+            var petUrl = "../media/" + this.petChoice + "3.png";
+            const petimg2 = new Image();
+            petimg2.src = petUrl;
+            petimg2.onload = () => {
+                ctx.drawImage(petimg2, x, y, this.petW, this.petH);
+            }
+
+            return petimg2;
+        }
+
+        animPet(){
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            // bed.drawObstacle();
+            ctx.drawImage(bed.drawObstacle(), bed.x, bed.y,bed.width,bed.height);
+            // this.drawPet(this.x, this.y);
+            ctx.drawImage(this.drawPet1(), this.x, this.y,this.petW,this.petH); //DOG NO LONGER BLINKS!!!!!!!!!!!!!!
+            ctx.clearRect(0,0,canvas.width,canvas.height); //trying animation frame by frame (inneficient way)
+            ctx.drawImage(bed.drawObstacle(), bed.x, bed.y,bed.width,bed.height);
+            ctx.drawImage(this.drawPet2(), this.x, this.y,this.petW,this.petH);
+            console.log(this.drawPet1());
+            console.log(this.drawPet2());
+        }
         petMove = (evt)=> {
-            let step = 5;
+            let step = 3;
             let dx = 3; //how many px pet moves
             let dy = 3;
             // console for checking numbers
@@ -101,13 +124,13 @@ window.addEventListener('load', function () {
             let lasty = this.y;
     
             //inCanvas position check////////
-            if (evt.keyCode == 39 && inCanvas(this.x + this.petW + step, this.y)) { // right
+            if (evt.keyCode == 39 && inCanvas(this.x + this.petW, this.y)) { // right
                 this.x += dx;
             }
-            else if (evt.keyCode == 37 && inCanvas(this.x + step, this.y)) { // left
+            else if (evt.keyCode == 37 && inCanvas(this.x - step, this.y)) { // left
                 this.x -= dx;
             }
-            else if (evt.keyCode == 38 && inCanvas(this.x + step, this.y)) { // up
+            else if (evt.keyCode == 38 && inCanvas(this.x, this.y-step)) { // up
                 this.y -= dy;
             }
             else if (evt.keyCode == 40 && inCanvas(this.x + step, this.y + this.petH)) { // down
@@ -116,8 +139,6 @@ window.addEventListener('load', function () {
             // if the pos satisfies inCanvas it will draw pet in updated pos////////
     
             //clears past pet and draws a new one in the updated pos
-            // try to either rotate pet picture when walking or change url path to different angles
-            // ctx.scale(-1, 1);
             if (bed.obstacleArea(this.x,this.y)) {
                 this.x = lastx;
                 this.y = lasty;
@@ -130,7 +151,7 @@ window.addEventListener('load', function () {
                 this.x = lastx;
                 this.y = lasty;
             }
-            else if (evt.keyCode == 38 && bed.obstacleArea(this.x, this.y)) { // up
+            else if (evt.keyCode == 38 && bed.obstacleArea(this.x, this.y - this.petH)) { // up
                 this.x = lastx;
                 this.y = lasty;
             }
@@ -138,20 +159,25 @@ window.addEventListener('load', function () {
                 this.x = lastx;
                 this.y = lasty;
             }
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-            // bed.drawObstacle();
-            ctx.drawImage(bed.drawObstacle(), bed.x, bed.y,bed.width,bed.height);
-            // this.drawPet(this.x, this.y);
-            ctx.drawImage(this.drawPet(), this.x, this.y,this.petW,this.petH); //DOG NO LONGER BLINKS!!!!!!!!!!!!!!
+            this.animPet();
         }
     }
 
     const bed = new Obstacle(0, 0, 50, 65,"bed");
     bed.drawObstacle();
 
+    const drawer = new Obstacle(50, 0, 10, 10,"drawer");
+    drawer.drawObstacle();
+
+    const desk = new Obstacle(70, 0, 40, 30,"desk");
+    desk.drawObstacle();
+
+    const wardrobe = new Obstacle(130, 0, 50, 65,"wardrobe");
+    wardrobe.drawObstacle();    
+
     var petWidth = 40;
     var pet = new Pet("dog", canvas.width / 2, canvas.height / 2, petWidth, petWidth/1.1);
-    pet.drawPet(canvas.width / 2, canvas.height / 2);
+    pet.drawPet1(canvas.width / 2, canvas.height / 2);
 
     // play music
     //////////////////// Pet Choice ///////////////////////
