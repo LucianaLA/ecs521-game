@@ -61,6 +61,7 @@ window.addEventListener('load', function () {
             furnitureimg.onload = () => {
                 ctx.drawImage(furnitureimg, this.x, this.y, this.width, this.height);
             }
+            return furnitureimg;
         }
         obstacleArea(x,y){
             return x > this.x && 
@@ -137,18 +138,19 @@ window.addEventListener('load', function () {
                 this.x = lastx;
                 this.y = lasty;
             }
-            ctx.clearRect(this.x - step, this.y - step, this.petW + step*2, this.petH + step*2);
-            bed.drawObstacle();
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            // bed.drawObstacle();
+            ctx.drawImage(bed.drawObstacle(), bed.x, bed.y,bed.width,bed.height);
             // this.drawPet(this.x, this.y);
             ctx.drawImage(this.drawPet(), this.x, this.y,this.petW,this.petH); //DOG NO LONGER BLINKS!!!!!!!!!!!!!!
         }
     }
 
-    const bed = new Obstacle(30, 0, 50, 65,"bed");
+    const bed = new Obstacle(0, 0, 50, 65,"bed");
     bed.drawObstacle();
 
     var petWidth = 40;
-    var pet = new Pet("dog", canvas.width / 2, canvas.height / 2, petWidth, petWidth/1.5);
+    var pet = new Pet("dog", canvas.width / 2, canvas.height / 2, petWidth, petWidth/1.1);
     pet.drawPet(canvas.width / 2, canvas.height / 2);
 
     // play music
