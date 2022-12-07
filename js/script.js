@@ -54,7 +54,7 @@ window.addEventListener('load', function () {
             ctx.fill();
             console.log(this.x);
         }
-        obstacleArea(x,y){
+        obstacleArea(x,y){              //read ctx canvas documentation
             return x > this.x && 
             x < this.x + this.width && 
             y > this.y && 
@@ -129,6 +129,7 @@ window.addEventListener('load', function () {
             }
             ctx.clearRect(this.x - step, this.y - step, this.petW + step*2, this.petH + step*2);
             this.drawPet(this.x, this.y);
+            //draw obstacle + from array
         }
     }
 
