@@ -55,6 +55,7 @@ window.addEventListener('load', function () {
             // ctx.fill();
             // console.log(this.x);
             ////// making furniture into images//////////////
+            // for each obstacle create obstacle
             var furnitureUrl = "../media/" + this.name + ".png";
             const furnitureimg = new Image();
             furnitureimg.src = furnitureUrl;
@@ -172,8 +173,8 @@ window.addEventListener('load', function () {
     const desk = new Obstacle(70, 0, 40, 30,"desk");
     desk.drawObstacle();
 
-    const wardrobe = new Obstacle(130, 0, 50, 65,"wardrobe");
-    wardrobe.drawObstacle();    
+    const closet = new Obstacle(130, 0, 50, 65,"closet");
+    closet.drawObstacle();    
 
     var petWidth = 40;
     var pet = new Pet("dog", canvas.width / 2, canvas.height / 2, petWidth, petWidth/1.1);
