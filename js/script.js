@@ -159,13 +159,7 @@ window.addEventListener('load', function () {
                 this.x = lastx;
                 this.y = lasty;
             }
-<<<<<<< HEAD
-            ctx.clearRect(this.x - step, this.y - step, this.petW + step*2, this.petH + step*2);
-            this.drawPet(this.x, this.y);
-            //draw obstacle + from array
-=======
             this.animPet();
->>>>>>> 0ea89f8e0157275e1c5f6a0a0e24a6316a3858bf
         }
     }
 
