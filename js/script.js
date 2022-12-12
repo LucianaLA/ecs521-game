@@ -72,6 +72,7 @@ window.addEventListener('load', function () {
         }
     }
 
+
     // sprite ///////////////////////////////////////////////////////////////////////////////////////////////////////
     let dog1WalkUrl = "../media/1dog/Walk.png";
     let dog1WalkLUrl = "../media/1dog/WalkL.png";
@@ -85,7 +86,7 @@ window.addEventListener('load', function () {
         sprite.src = spriteType;
         window.requestAnimationFrame(animate);
         function animate() {
-            let frame = Math.floor(counter % 6);
+            let frame = counter;//Math.floor(counter % 6);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(sprite, frame * frame_width, 0, frame_width, frame_height, x, y, frame_width, frame_height);
             for (let i = 0; i < obstacleArr.length; i++) {
@@ -93,7 +94,7 @@ window.addEventListener('load', function () {
             }
             counter = counter + 1;
             if (counter > 6){
-                counter=0;
+                counter=1;
             }
             // window.requestAnimationFrame(animate);
         }
@@ -107,17 +108,6 @@ window.addEventListener('load', function () {
             this.petW = petW;
             this.petH = petH;
         }
-        drawPet1(x, y) {
-            var petUrl = "../media/" + this.petChoice + "1.png";
-            const petimg = new Image();
-            petimg.src = petUrl;
-            petimg.onload = () => {
-                ctx.drawImage(petimg, x, y, this.petW, this.petH);
-            }
-
-            return petimg;
-        }
-
         petMove = (evt) => {
             console.log(evt);
             let step = 3;
