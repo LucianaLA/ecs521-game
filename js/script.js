@@ -65,31 +65,37 @@ window.addEventListener('load', function () {
             return furnitureimg;
         }
         obstacleArea(x, y) {              //read ctx canvas documentation
-            return x > this.x &&
+            return !(x > this.x &&
                 x < this.x + this.width &&
                 y > this.y &&
-                y < this.y + this.height;
+                y < this.y + this.height);
         }
     }
 
     // sprite ///////////////////////////////////////////////////////////////////////////////////////////////////////
     let dog1WalkUrl = "../media/1dog/Walk.png";
+    let dog1WalkLUrl = "../media/1dog/WalkL.png";
     let dog1IdleUrl = "../media/1dog/Idle.png";
     let cat3WalkUrl = "../media/3cat/Walk.png";
     let sprite = new Image();
     let counter = 0,
         frame_width = 48,
         frame_height = 48;
-    petWalk = function (x, y, spriteType) {
+    let spritePet = function (x, y, spriteType) {
         sprite.src = spriteType;
         window.requestAnimationFrame(animate);
         function animate() {
             let frame = Math.floor(counter % 6);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(sprite, frame * frame_width, 0, frame_width, frame_height, x, y, frame_width, frame_height);
-            counter = counter + .25;
-
-            window.requestAnimationFrame(animate);
+            for (let i = 0; i < obstacleArr.length; i++) {
+                ctx.drawImage(obstacleArr[i].drawObstacle(), obstacleArr[i].x, obstacleArr[i].y, obstacleArr[i].width, obstacleArr[i].height);
+            }
+            counter = counter + 1;
+            if (counter > 6){
+                counter=0;
+            }
+            // window.requestAnimationFrame(animate);
         }
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -111,27 +117,9 @@ window.addEventListener('load', function () {
 
             return petimg;
         }
-        drawPet2(x, y) {
-            var petUrl = "../media/" + this.petChoice + "3.png";
-            const petimg2 = new Image();
-            petimg2.src = petUrl;
-            petimg2.onload = () => {
-                ctx.drawImage(petimg2, x, y, this.petW, this.petH);
-            }
-            return petimg2;
-        }
 
-        animPet() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            petWalk(this.x, this.y,dog1WalkUrl);
-            ctx.clearRect(0, 0, canvas.width, canvas.height); //trying animation frame by frame (inneficient way)
-            for (let i = 0; i < obstacleArr.length; i++) {
-                ctx.drawImage(obstacleArr[i].drawObstacle(), obstacleArr[i].x, obstacleArr[i].y, obstacleArr[i].width, obstacleArr[i].height);
-            }
-            // ctx.drawImage(bed.drawObstacle(), bed.x, bed.y,bed.width,bed.height);
-            petWalk(this.x, this.y,dog1IdleUrl);
-        }
         petMove = (evt) => {
+            console.log(evt);
             let step = 3;
             let dx = 3; //how many px pet moves
             let dy = 3;
@@ -143,47 +131,107 @@ window.addEventListener('load', function () {
             let lasty = this.y;
 
             //inCanvas position check////////
-            if (evt.keyCode == 39 && inCanvas(this.x + this.petW, this.y)) { // right
-                this.x += dx;
-            }
-            else if (evt.keyCode == 37 && inCanvas(this.x - step, this.y)) { // left
-                this.x -= dx;
-            }
-            else if (evt.keyCode == 38 && inCanvas(this.x, this.y - step)) { // up
-                this.y -= dy;
-            }
-            else if (evt.keyCode == 40 && inCanvas(this.x + step, this.y + this.petH)) { // down
-                this.y += dy;
-            }
+            // if (evt.keyCode == 39 && inCanvas(this.x + this.petW, this.y)) { // right
+            //     this.x += dx;
+            //     spritePet(this.x, this.y, dog1WalkUrl);
+            // }
+            // else if (evt.keyCode == 37 && inCanvas(this.x - step, this.y)) { // left
+            //     this.x -= dx;
+            //     spritePet(this.x, this.y, dog1WalkLUrl);
+            // }
+            // else if (evt.keyCode == 38 && inCanvas(this.x, this.y)) { // up
+            //     this.y -= dy;
+            //     spritePet(this.x, this.y, dog1WalkUrl);
+            // }
+            // else if (evt.keyCode == 40 && inCanvas(this.x + step, this.y + this.petH)) { // down
+            //     this.y += dy;
+            //     spritePet(this.x, this.y, dog1WalkUrl);
+            // } 
+            /////////////////////////////////////////////////////////////////////
+
+            // else if (evt.keyCode != 40 || evt.keycode !=39 || evt.keycode != 38 || evt.keycode != 37){
+            //     spritePet(this.x, this.y, dog1IdleUrl);
+            //     console.log('code passed through idle;')
+            // } 
+            // spritePet(this.x, this.y, dog1IdleUrl);
             // if the pos satisfies inCanvas it will draw pet in updated pos////////
 
-            //clears past pet and draws a new one in the updated pos
+            //clears past pet and draws a new one in the updated pos///////
+            // for (let i = 0; i < obstacleArr.length; i++) {
+            //     if (obstacleArr[i].obstacleArea(this.x, this.y)) {
+            //         this.x = lastx;
+            //         this.y = lasty;
+            //         spritePet(this.x, this.y,dog1IdleUrl);
+            //         console.log('code passed through idle;')
+            //     }
+            //     if (evt.keyCode == 39 && obstacleArr[i].obstacleArea(this.x + this.petW, this.y)) { // right
+            //         this.x = lastx;
+            //         this.y = lasty;
+            //         spritePet(this.x, this.y,dog1IdleUrl);
+            //         console.log('code passed through idle;')
+            //     }
+            //     else if (evt.keyCode == 37 && obstacleArr[i].obstacleArea(this.x, this.y)) { // left
+            //         this.x = lastx;
+            //         this.y = lasty;
+            //         spritePet(this.x, this.y,dog1IdleUrl);
+            //         console.log('code passed through idle;')
+            //     }
+            //     else if (evt.keyCode == 38 && obstacleArr[i].obstacleArea(this.x, this.y - this.petH)) { // up
+            //         this.x = lastx;
+            //         this.y = lasty;
+            //         spritePet(this.x, this.y,dog1IdleUrl);
+            //         console.log('code passed through idle;')
+            //     }
+            //     else if (evt.keyCode == 40 && obstacleArr[i].obstacleArea(this.x, this.y + this.petH)) { // down
+            //         this.x = lastx;
+            //         this.y = lasty;
+            //         spritePet(this.x, this.y,dog1IdleUrl);
+            //         console.log('code passed through idle;')
+            //     } else{
+            //         spritePet(this.x, this.y, dog1WalkLUrl);
+            //     }
+            // }
+
+
             for (let i = 0; i < obstacleArr.length; i++) {
-                if (obstacleArr[i].obstacleArea(this.x, this.y)) {
-                    this.x = lastx;
-                    this.y = lasty;
+                if (! obstacleArr[i].obstacleArea(this.x, this.y)) {
+                    // this.x = lastx;
+                    // this.y = lasty;
+                    spritePet(this.x, this.y,dog1IdleUrl);
+                    console.log('code passed through idle;')
                 }
-                if (evt.keyCode == 39 && obstacleArr[i].obstacleArea(this.x + this.petW, this.y)) { // right
-                    this.x = lastx;
-                    this.y = lasty;
+                if (evt.keyCode == 39 && obstacleArr[i].obstacleArea(this.x + this.petW, this.y) && inCanvas(this.x + this.petW, this.y)) { // right
+                    this.x += dx;
+                    spritePet(this.x, this.y,dog1WalkUrl);
+                    console.log('code passed through walk right;')
                 }
-                else if (evt.keyCode == 37 && obstacleArr[i].obstacleArea(this.x, this.y)) { // left
-                    this.x = lastx;
-                    this.y = lasty;
+                else if (evt.keyCode == 37 && obstacleArr[i].obstacleArea(this.x, this.y) && inCanvas(this.x - step, this.y)) { // left
+                    this.x -= dx;
+                    spritePet(this.x, this.y,dog1WalkLUrl);
+                    console.log('code passed through walk left;')
                 }
-                else if (evt.keyCode == 38 && obstacleArr[i].obstacleArea(this.x, this.y - this.petH)) { // up
-                    this.x = lastx;
-                    this.y = lasty;
+                else if (evt.keyCode == 38 && obstacleArr[i].obstacleArea(this.x, this.y - this.petH) && inCanvas(this.x, this.y+this.petH/3)) { // up
+                    this.y -= dy;
+                    spritePet(this.x, this.y,dog1WalkUrl);
+                    console.log('code passed through walk up;')
                 }
-                else if (evt.keyCode == 40 && obstacleArr[i].obstacleArea(this.x, this.y + this.petH)) { // down
-                    this.x = lastx;
-                    this.y = lasty;
+                else if (evt.keyCode == 40 && obstacleArr[i].obstacleArea(this.x, this.y + this.petH) && inCanvas(this.x + step, this.y + this.petH)) { // down
+                    this.y += dy;
+                    spritePet(this.x, this.y,dog1WalkLUrl);
+                    console.log('code passed through walk down;')
+                } else{
+                    spritePet(this.x, this.y, dog1IdleUrl);
                 }
             }
-            this.animPet();
         }
     }
 
+    //make pet object and add idle sprite
+    var pet = new Pet("dog", 0, 80, frame_width, frame_height);
+    window.onload = function(){spritePet(this.x, this.y, dog1IdleUrl);
+        console.log('idle was drawn?');}
+
+    // make obstacle objects and place in the array
     let obstacleArr = new Array();
 
     const bed = new Obstacle(0, 0, 50, 65, "bed");
@@ -201,10 +249,6 @@ window.addEventListener('load', function () {
     const closet = new Obstacle(130, 0, 50, 65, "closet");
     obstacleArr[3] = closet;
     closet.drawObstacle();
-
-    var petWidth = 40;
-    var pet = new Pet("dog", canvas.width / 2, canvas.height / 2, petWidth, petWidth / 1.1);
-    petWalk(this.x, this.y, dog1IdleUrl);
 
     // play music
     //////////////////// Pet Choice ///////////////////////
