@@ -108,7 +108,10 @@ window.addEventListener('load', function () {
             // this.drawPet(this.x, this.y);
             ctx.drawImage(this.drawPet1(), this.x, this.y,this.petW,this.petH); //DOG NO LONGER BLINKS!!!!!!!!!!!!!!
             ctx.clearRect(0,0,canvas.width,canvas.height); //trying animation frame by frame (inneficient way)
-            ctx.drawImage(bed.drawObstacle(), bed.x, bed.y,bed.width,bed.height);
+            for (let i=0;i<obstacleArr.length;i++){
+                ctx.drawImage(obstacleArr[i].drawObstacle(),obstacleArr[i].x,obstacleArr[i].y,obstacleArr[i].width,obstacleArr[i].height);
+            }
+            // ctx.drawImage(bed.drawObstacle(), bed.x, bed.y,bed.width,bed.height);
             ctx.drawImage(this.drawPet2(), this.x, this.y,this.petW,this.petH);
             console.log(this.drawPet1());
             console.log(this.drawPet2());
@@ -140,40 +143,48 @@ window.addEventListener('load', function () {
             // if the pos satisfies inCanvas it will draw pet in updated pos////////
     
             //clears past pet and draws a new one in the updated pos
-            if (bed.obstacleArea(this.x,this.y)) {
-                this.x = lastx;
-                this.y = lasty;
-            }
-            if (evt.keyCode == 39 && bed.obstacleArea(this.x + this.petW, this.y)) { // right
-                this.x = lastx;
-                this.y = lasty;
-            }
-            else if (evt.keyCode == 37 && bed.obstacleArea(this.x, this.y)) { // left
-                this.x = lastx;
-                this.y = lasty;
-            }
-            else if (evt.keyCode == 38 && bed.obstacleArea(this.x, this.y - this.petH)) { // up
-                this.x = lastx;
-                this.y = lasty;
-            }
-            else if (evt.keyCode == 40 && bed.obstacleArea(this.x, this.y + this.petH)) { // down
-                this.x = lastx;
-                this.y = lasty;
+            for (let i=0;i<obstacleArr.length;i++){
+                if (obstacleArr[i].obstacleArea(this.x,this.y)) {
+                    this.x = lastx;
+                    this.y = lasty;
+                }
+                if (evt.keyCode == 39 && obstacleArr[i].obstacleArea(this.x + this.petW, this.y)) { // right
+                    this.x = lastx;
+                    this.y = lasty;
+                }
+                else if (evt.keyCode == 37 && obstacleArr[i].obstacleArea(this.x, this.y)) { // left
+                    this.x = lastx;
+                    this.y = lasty;
+                }
+                else if (evt.keyCode == 38 && obstacleArr[i].obstacleArea(this.x, this.y - this.petH)) { // up
+                    this.x = lastx;
+                    this.y = lasty;
+                }
+                else if (evt.keyCode == 40 && obstacleArr[i].obstacleArea(this.x, this.y + this.petH)) { // down
+                    this.x = lastx;
+                    this.y = lasty;
+                }
             }
             this.animPet();
         }
     }
 
+    let obstacleArr = new Array();
+
     const bed = new Obstacle(0, 0, 50, 65,"bed");
+    obstacleArr[0] = bed;
     bed.drawObstacle();
 
     const drawer = new Obstacle(50, 0, 10, 10,"drawer");
+    obstacleArr[1] = drawer;
     drawer.drawObstacle();
 
     const desk = new Obstacle(70, 0, 40, 30,"desk");
+    obstacleArr[2] = desk;
     desk.drawObstacle();
 
     const closet = new Obstacle(130, 0, 50, 65,"closet");
+    obstacleArr[3] = closet;
     closet.drawObstacle();    
 
     var petWidth = 40;
@@ -183,11 +194,6 @@ window.addEventListener('load', function () {
     // play music
     //////////////////// Pet Choice ///////////////////////
     /////////////////////////// LEVEL 1 //////////////////////////////////////////////////////////////////
-
-    //checks if the mouse/character is in interaction area (near interactable item) - works like inCanvas
-    // function inInteractionArea(x,y){
-    //     return ;
-    // }
 
     // add item to inventory
     // Item.addToInventory(itemName); should append inventory[]??
