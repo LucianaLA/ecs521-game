@@ -265,7 +265,7 @@ window.addEventListener('load', function () {
     createObject("cards",286,63,29,9,"cards");
     createObject("door",415,138,11,47,"door");
     
-    void createObject(objectName,x,y,xsize,ysize,filename){
+    function createObject(objectName,x,y,xsize,ysize,filename){
         const objectName = new Obstacle(x,y,xsize,ysize,filename);
         obstacleArr.push(objectName);
         objectName.drawObstacle();
