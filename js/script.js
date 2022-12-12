@@ -11,33 +11,52 @@ window.addEventListener('load', function () {
     //inventory as array
     let inventory = []; //fill with item eg [key,food,food], [food,key]
 
+    function cleanInventory() {
+        //when you switch levels, 
+        inventory.length = 0;
+    }
+    function viewInventory() {
+        //return inventory array
+        window.alert(inventory);
+    }
+    function removeFromInventory(itemName) { //remove first instance of item
+        for (let i = 0; i < inventory.length; i++) {
+            if (inventory[i].itemName == itemName) {
+                inventory = inventory.splice(i);
+                break;
+            }
+        }
+    }
+
     //item (for inventory) class
     class Item {
         constructor(itemName,x,y,xsize,ysize,fileName) {
-            //item type? if item == health, if item == key etc
-            
+            itemName = this.itemName;
+            xpos = x;
+            ypos = y;
+            xsize = this.xsize;
+            ysize = this.ysize;
+            fileName = this.fileName;   //to create the visual of a food item??
         }
-        addToInventory(itemName) {
-            inventory = inventory.push(itemName);
+        drawItem(){
+            var itemURL = "../media/level1/item" + fileName + ".png";
+            const itemImage = new Image();
+            itemImage.src = itemURL;
+            ctx.drawImage(itemImage,xpos,ypos,xsize,ysize);
         }
-        removeFromInventory(itemName) { //remove first instance of item
-            for (let i = 0; i < inventory.length; i++) {
-                if (inventory[i] == itemName) {
-                    inventory = inventory.splice(i);
-                    break;
-                }
-            }
+        addToInventory() {
+            inventory = inventory.push(Item);
         }
-        cleanInventory() {
-            //when you switch levels, 
-            inventory.length = 0;
-        }
-        viewInventory() {
-            //return inventory array
-        }
-        checkItem(itemName) {
+        checkItem() {
             //searches array for key when prompted by door, if yes, remove from array and open door
             //searches array for food when prompted by user, if yes remove from array and increase health
+            for(i=0;i<inventory.length;i++){
+                if(inventory[i].itemName == "food"){
+                    //increaseHealth();
+                }else if(inventory[i].itemName == "key"){
+                    //openDoor();
+                }
+            }
         }
     }
 
@@ -246,7 +265,12 @@ window.addEventListener('load', function () {
     createObject("cards",286,63,29,9,"cards");
     createObject("door",415,138,11,47,"door");
     
-
+    function createObject(objectName,x,y,xsize,ysize,filename){
+        const objectName = new Obstacle(x,y,xsize,ysize,filename);
+        obstacleArr.push(objectName);
+        objectName.drawObstacle();
+    }
+    
 
     // play music
     //////////////////// Pet Choice ///////////////////////
