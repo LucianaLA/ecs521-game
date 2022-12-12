@@ -13,9 +13,9 @@ window.addEventListener('load', function () {
 
     //item (for inventory) class
     class Item {
-        constructor(itemName) {
+        constructor(itemName,x,y,xsize,ysize,fileName) {
             //item type? if item == health, if item == key etc
-            itemName = this.itemName;
+            
         }
         addToInventory(itemName) {
             inventory = inventory.push(itemName);
@@ -56,7 +56,7 @@ window.addEventListener('load', function () {
             // console.log(this.x);
             ////// making furniture into images//////////////
             // for each obstacle create obstacle
-            var furnitureUrl = "../media/" + this.name + ".png";
+            var furnitureUrl = "../media/level1/objects" + this.name + ".png";
             const furnitureimg = new Image();
             furnitureimg.src = furnitureUrl;
             furnitureimg.onload = () => {
@@ -231,24 +231,30 @@ window.addEventListener('load', function () {
     window.onload = function(){spritePet(this.x, this.y, dog1IdleUrl);
         console.log('idle was drawn?');}
 
-    // make obstacle objects and place in the array
+    // make obstacle objects and place in the array hopefully read from objectreference.txt
     let obstacleArr = new Array();
+    
+    createObject("bed",6,95,37,43,"bed");
+    createObject("painting",188,53,37,34,"painting");
+    createObject("painting2",322,53,26,31,"painting2");
+    createObject("wardrobe",46,66,48,48,"wardrobe");
+    createObject("stand",138,114,48,25,"stand");
+    createObject("stand2",229,90,48,25,"stand");
+    createObject("wardrobe2",276,67,48,48,"wardrobe");
+    createObject("tv",140,93,44,29,"tv");
+    createObject("plant",340,94,24,46,"plant");
+    createObject("pillow",149,158,18,12,"pillow");
+    createObject("plant2",247,78,11,14,"plant2");
+    createObject("cards",286,63,29,9,"cards");
+    createObject("door",415,138,11,47,"door");
+    
+    void createObject(objectName,x,y,xsize,ysize,filename){
+        const objectName = new Obstacle(x,y,xsize,ysize,filename);
+        obstacleArr.push(objectName);
+        objectName.drawObstacle();
+    }
+    
 
-    const bed = new Obstacle(0, 0, 50, 65, "bed");
-    obstacleArr[0] = bed;
-    bed.drawObstacle();
-
-    const drawer = new Obstacle(50, 0, 10, 10, "drawer");
-    obstacleArr[1] = drawer;
-    drawer.drawObstacle();
-
-    const desk = new Obstacle(70, 0, 40, 30, "desk");
-    obstacleArr[2] = desk;
-    desk.drawObstacle();
-
-    const closet = new Obstacle(130, 0, 50, 65, "closet");
-    obstacleArr[3] = closet;
-    closet.drawObstacle();
 
     // play music
     //////////////////// Pet Choice ///////////////////////

@@ -1,0 +1,14 @@
+Object Name, xpos, ypos, xsize, ysize
+bed,6,95,37,43
+painting,188,53,37,34
+painting2,322,53,26,31
+wardrobe,46,66,48,48
+stand,138,114,48,25
+stand2,229,90,47,25
+wardrobe2,276,67,48,48
+tv,140,93,44,29
+plant,340,94,24,46
+pillow,149,158,18,12
+plant2,247,78,11,14
+cards,286,63,29,9
+door,415,138,11,47
