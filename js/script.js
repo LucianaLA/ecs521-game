@@ -75,7 +75,7 @@ window.addEventListener('load', function () {
             // console.log(this.x);
             ////// making furniture into images//////////////
             // for each obstacle create obstacle
-            var furnitureUrl = "../media/level1/objects" + this.name + ".png";
+            var furnitureUrl = "../media/level1/objects/" + this.name + ".png";
             const furnitureimg = new Image();
             furnitureimg.src = furnitureUrl;
             furnitureimg.onload = () => {
@@ -243,6 +243,14 @@ window.addEventListener('load', function () {
     // make obstacle objects and place in the array hopefully read from objectreference.txt
     let obstacleArr = new Array();
     
+    createObject = function(objectName,x,y,xsize,ysize,filename){
+        this.objectName = new Obstacle(x,y,xsize,ysize,filename);
+        obstacleArr.push(this.objectName);
+        for (let i=0; i< obstacleArr.length; i++){
+            ctx.drawImage(obstacleArr[i].drawObstacle(), obstacleArr[i].x, obstacleArr[i].y, obstacleArr[i].width, obstacleArr[i].height);
+        }
+    }
+
     createObject("bed",6,95,37,43,"bed");
     createObject("painting",188,53,37,34,"painting");
     createObject("painting2",322,53,26,31,"painting2");
@@ -257,15 +265,12 @@ window.addEventListener('load', function () {
     createObject("cards",286,63,29,9,"cards");
     createObject("door",415,138,11,47,"door");
     
-    function createObject(objectName,x,y,xsize,ysize,filename){
+    void createObject(objectName,x,y,xsize,ysize,filename){
         const objectName = new Obstacle(x,y,xsize,ysize,filename);
         obstacleArr.push(objectName);
         objectName.drawObstacle();
     }
-
-    //Placeitem on canvas, click on item to add to inventory
     
-
 
     // play music
     //////////////////// Pet Choice ///////////////////////
