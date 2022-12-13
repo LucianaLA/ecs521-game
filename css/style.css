@@ -7,6 +7,39 @@
   background-repeat: no-repeat;
   border: 1pt white solid;
 }
+
+#howtoplay{
+  background-image: url("../media/bg-room.jpg");
+  background-size:cover;
+}
+
+img{
+  float: left;
+  position: relative;
+
+}
+
+.arrowkeys{
+  top:3em;
+  left:40em;
+}
+.spacekey{
+  top:2em;
+  left:42em;
+}
+.ikey{
+  width:5%;
+  top:2em;
+  left:45em;
+}
+
+.para{
+  text-align: center;
+  position:inherit;
+  background-color: grey 50%;
+  color: white;
+  margin-bottom: 2em;
+}
 #canvasChoice {
   width:100%;
   /* height: 100%; */
@@ -17,10 +50,7 @@
   /* border: 1pt white solid; */
 }
 
-
-body{
-  background-color: rgb(77, 49, 18);
-}
+body{background-color: burlywood;}
 
 h1{
   width: 100%;
@@ -28,6 +58,15 @@ h1{
   text-align: center;
   font-size: 500%;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#help{
+  width:100%;
+  padding-top: 1em;
+  color: white;
+  text-align: center;
+  font-size: 150%;
+  font-family:'Courier New', Courier, monospace;
 }
 
 p{
