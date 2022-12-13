@@ -113,7 +113,7 @@ window.addEventListener('load', function () {
                 ctx.drawImage(obstacleArr[i].drawObstacle(), obstacleArr[i].x, obstacleArr[i].y, obstacleArr[i].width, obstacleArr[i].height);
             }   ctx.drawImage(sprite, frame * frame_width, 0, frame_width, frame_height, x, y, frame_width, frame_height);
             counter = counter + 1;
-            if (counter > 6){
+            if (counter > 4){
                 counter=1;
             }
             // window.requestAnimationFrame(animate);
