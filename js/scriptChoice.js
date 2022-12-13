@@ -25,8 +25,8 @@ frame_height = 48;
 function choicePet() {
   window.requestAnimationFrame(animate);
   function animate() {
-    let frame = Math.floor(counter % 6);
-    // ctxChoice.clearRect(0, 0, canvasChoice.width, canvasChoice.height);
+    let frame = Math.floor(counter % 4);
+    ctxChoice.clearRect(0, 0, canvasChoice.width, canvasChoice.height);
     for(var i=0;i<imgArr.length;i++){
         ctxChoice.drawImage(imgArr[i], frame * frame_width, 0, frame_width, frame_height,i*50,0, frame_width, frame_height);
     }
